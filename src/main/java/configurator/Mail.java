@@ -1,4 +1,4 @@
-package com.hft;
+package configurator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

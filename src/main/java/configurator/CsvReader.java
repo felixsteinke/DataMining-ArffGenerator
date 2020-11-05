@@ -1,4 +1,4 @@
-package com.hft;
+package configurator;
 
 import java.io.*;
 import java.util.ArrayList;

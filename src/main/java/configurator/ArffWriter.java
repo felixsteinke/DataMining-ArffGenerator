@@ -1,4 +1,4 @@
-package com.hft;
+package configurator;
 
 
 import weka.core.Attribute;
