@@ -10,8 +10,7 @@ public class AttributeManager {
         this.blackListedWords = CsvReader.readWordlist("resources/badwords.csv");
     }
 
-    public  void containsBlacklistWord(Mail mail){
-
+    public ArrayList<String> getBlackListedWords() {
+        return blackListedWords;
     }
-
 }
