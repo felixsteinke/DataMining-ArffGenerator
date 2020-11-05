@@ -22,7 +22,7 @@ public class CsvReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Ignored " + ignoredLines + " Lines of Data.");
+        System.out.println("[INFO] Ignored " + ignoredLines + " Lines of Data.");
         return list;
     }
 

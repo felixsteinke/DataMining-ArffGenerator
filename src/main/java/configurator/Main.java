@@ -8,6 +8,7 @@ public class Main {
 	// write your code here
         ArrayList <Mail> sourceData = CsvReader.readCsvFile("resources/enron.csv",";");
         AttributeManager manager = new AttributeManager();
+
         System.out.println("Finished!");
     }
 }

@@ -21,6 +21,7 @@ public class Mail {
         this.text = text;
         this.spam = spam;
 
+        this.containsWhiteListWord = false;
         this.containsBlackListWord = false;
     }
 
@@ -32,13 +33,19 @@ public class Mail {
     private void processAnalyticWhiteList(ArrayList<String> whiteList){
         for (String goodWord : whiteList) {
             if (subject.contains(goodWord) || text.contains(goodWord)){
-
+                containsWhiteListWord = true;
+                return;
             }
         }
     }
 
     private void processAnalyticBlackList(ArrayList<String> blackList){
-
+        for (String badWord : blackList) {
+            if (subject.contains(badWord) || text.contains(badWord)){
+                containsBlackListWord = true;
+                return;
+            }
+        }
     }
 
     public String toAnalyticCsv(){
