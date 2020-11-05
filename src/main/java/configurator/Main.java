@@ -19,6 +19,7 @@ public class Main {
                 System.out.println("[INFO] Progress at " + mailCounter + " from " + mails.size());
             }
         }
+
         int counterWhiteSubject = 0;
         int counterWhiteText = 0;
         int counterBlackSubject = 0;
