@@ -1,9 +1,11 @@
-package configurator;
+package dataProviders;
+
+import configurator.Mail;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class CsvReader {
+public class CsvUtility {
 
     public static ArrayList<Mail> readCsvFile(String pathToFile, String separator) {
         int ignoredLines = 0;
@@ -27,7 +29,7 @@ public class CsvReader {
     }
 
     public static ArrayList<String> readWordlist(String pathToFile){
-        ArrayList<String> result = new ArrayList();
+        ArrayList<String> result = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(pathToFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -39,10 +41,12 @@ public class CsvReader {
         return result;
     }
 
-    public static void writeCsvFile(String pathToFile, ArrayList<String> data) {
+    public static void writeCsvFile(String pathToFile, ArrayList<Mail> data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
-            for (String str : data) {
-                writer.write(str + "\n");
+            String header = "id;spam;GoodWordInSubject;GoodWordInText;BadWordInSubject;BadWordInText\n";
+            writer.write(header);
+            for (Mail mail : data) {
+                writer.write(mail.toAnalyticCsv() + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

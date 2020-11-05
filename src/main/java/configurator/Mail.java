@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 
 public class Mail {
 
-    private int id;
-    private String subject;
-    private String text;
-    private boolean spam;
+    private final int id;
+    private final String subject;
+    private final String text;
+    private final boolean spam;
 
     private boolean withWhiteListWordInSubject;
     private boolean withWhiteListWordInText;
@@ -26,22 +26,6 @@ public class Mail {
         this.withWhiteListWordInText = false;
         this.withBlackListWordInSubject = false;
         this.withBlackListWordInText = false;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public boolean isSpam() {
-        return spam;
     }
 
     public boolean isWithWhiteListWordInSubject() {
