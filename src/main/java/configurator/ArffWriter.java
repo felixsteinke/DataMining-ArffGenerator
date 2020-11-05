@@ -55,6 +55,7 @@ public class ArffWriter {
         data = new Instances("MyRelation", atts, 0);
 
         // 3. fill with data
+
         // first instance
         vals = new double[data.numAttributes()];
         // - numeric
