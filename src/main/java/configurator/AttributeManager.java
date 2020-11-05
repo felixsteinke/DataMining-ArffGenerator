@@ -8,7 +8,11 @@ public class AttributeManager {
     private ArrayList<String> blackListedWords;
 
     public AttributeManager() {
-        this.blackListedWords = CsvReader.readWordlist("resources/badwords.csv");
+        this.blackListedWords = CsvReader.readWordlist("src/main/resources/badwords.csv");
+    }
+
+    public ArrayList<String> getWhiteListedWords() {
+        return whiteListedWords;
     }
 
     public ArrayList<String> getBlackListedWords() {
