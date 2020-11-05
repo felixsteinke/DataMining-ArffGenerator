@@ -16,6 +16,12 @@ public class Mail {
     private boolean withBlackListWordInSubject;
     private boolean withBlackListWordInText;
 
+    private int averageSentenceLength;
+    private int maximumSentenceLength;
+
+    private boolean biggerThanAverageSubjectLength;
+    private boolean biggerThanAverageTextLength;
+
     public Mail(int id, String subject, String text, boolean spam) {
         this.id = id;
         this.subject = subject;
@@ -26,6 +32,97 @@ public class Mail {
         this.withWhiteListWordInText = false;
         this.withBlackListWordInSubject = false;
         this.withBlackListWordInText = false;
+
+        processSentenceAnalysis();
+
+        this.biggerThanAverageSubjectLength = false;
+        this.biggerThanAverageTextLength = false;
+    }
+
+    public void processAnalytics(ArrayList<String> whiteList, ArrayList<String> blackList, int averageSubjectLength, int averageTextLength) {
+        processAnalyticWhiteList(whiteList);
+        processAnalyticBlackList(blackList);
+
+        processAnalyticAverageLengths(averageSubjectLength, averageTextLength);
+    }
+
+    public void processAnalyticWhiteList(ArrayList<String> whiteList) {
+        for (String goodWord : whiteList) {
+            if (sourceMatchesWord(this.subject, goodWord)) {
+                withWhiteListWordInSubject = true;
+                return;
+            }
+            if (sourceMatchesWord(this.text, goodWord)) {
+                withWhiteListWordInText = true;
+                return;
+            }
+        }
+    }
+
+    public void processAnalyticBlackList(ArrayList<String> blackList) {
+        for (String badWord : blackList) {
+            if (sourceMatchesWord(this.subject, badWord)) {
+                withBlackListWordInSubject = true;
+                return;
+            }
+            if (sourceMatchesWord(this.text, badWord)) {
+                withBlackListWordInText = true;
+                return;
+            }
+        }
+    }
+
+    private boolean sourceMatchesWord(String source, String word) {
+        String pattern = ".*" + word + ".*";
+        Pattern registrarPattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = registrarPattern.matcher(source);
+        return matcher.find();
+    }
+
+    private void processSentenceAnalysis() {
+        //TODO
+        this.averageSentenceLength = -1;
+        this.maximumSentenceLength = -1;
+    }
+
+
+    public void processAnalyticAverageLengths(int averageSubjectLength, int averageTextLength) {
+        if (this.subject.length() > averageSubjectLength)
+            this.biggerThanAverageSubjectLength = true;
+        if (this.text.length() > averageTextLength)
+            this.biggerThanAverageTextLength = true;
+    }
+
+    /*
+    toString
+     */
+
+    public String toCsvString() {
+        return id + ";"
+                + spam + ";"
+
+                + withWhiteListWordInSubject + ";"
+                + withWhiteListWordInText + ";"
+                + withBlackListWordInSubject + ";"
+                + withBlackListWordInText + ";"
+
+                + averageSentenceLength + ";"
+                + maximumSentenceLength + ";"
+
+                + biggerThanAverageSubjectLength + ";"
+                + biggerThanAverageTextLength;
+    }
+
+    /*
+    Getter
+     */
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public boolean isWithWhiteListWordInSubject() {
@@ -44,53 +141,19 @@ public class Mail {
         return withBlackListWordInText;
     }
 
-    public void processAnalytics(ArrayList<String> whiteList, ArrayList<String> blackList){
-        processAnalyticWhiteList(whiteList);
-        processAnalyticBlackList(blackList);
+    public int getAverageSentenceLength() {
+        return averageSentenceLength;
     }
 
-    private void processAnalyticWhiteList(ArrayList<String> whiteList){
-        for (String goodWord : whiteList) {
-            if (processSourceMatchesWord(this.subject, goodWord)){
-                withWhiteListWordInSubject = true;
-                return;
-            }
-            if (processSourceMatchesWord(this.text, goodWord)){
-                withWhiteListWordInText = true;
-                return;
-            }
-        }
+    public int getMaximumSentenceLength() {
+        return maximumSentenceLength;
     }
 
-    private void processAnalyticBlackList(ArrayList<String> blackList){
-        for (String badWord : blackList) {
-            if (processSourceMatchesWord(this.subject, badWord)){
-                withBlackListWordInSubject = true;
-                return;
-            }
-            if (processSourceMatchesWord(this.text, badWord)){
-                withBlackListWordInText = true;
-                return;
-            }
-        }
+    public boolean isBiggerThanAverageSubjectLength() {
+        return biggerThanAverageSubjectLength;
     }
 
-    private boolean processSourceMatchesWord(String source, String word){
-        String pattern = ".*" + word + ".*";
-        Pattern registrarPattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = registrarPattern.matcher(source);
-        return matcher.find();
-
-    }
-
-
-
-    public String toAnalyticCsv(){
-        return id + ";"
-                + spam + ";"
-                + withWhiteListWordInSubject + ";"
-                + withWhiteListWordInText + ";"
-                + withBlackListWordInSubject + ";"
-                + withBlackListWordInText;
+    public boolean isBiggerThanAverageTextLength() {
+        return biggerThanAverageTextLength;
     }
 }
