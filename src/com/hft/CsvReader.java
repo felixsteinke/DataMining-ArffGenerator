@@ -26,6 +26,18 @@ public class CsvReader {
         return list;
     }
 
+    public static ArrayList<String> readWordlist(String pathToFile){
+        ArrayList<String> result = new ArrayList();
+        try (BufferedReader br = new BufferedReader(new FileReader(pathToFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                result.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public static void writeCsvFile(String pathToFile, ArrayList<String> data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {

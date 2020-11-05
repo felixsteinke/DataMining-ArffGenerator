@@ -7,8 +7,7 @@ public class AttributeManager {
     private  ArrayList<String> blackListedWords;
 
     public AttributeManager() {
-        this.blackListedWords = new ArrayList<>();
-        blackListedWords.add("sex");
+        this.blackListedWords = CsvReader.readWordlist("resources/badwords.csv");
     }
 
     public  void containsBlacklistWord(Mail mail){
