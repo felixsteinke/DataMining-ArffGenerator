@@ -43,10 +43,20 @@ public class CsvUtility {
 
     public static void writeCsvFile(String pathToFile, ArrayList<Mail> data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
-            String header = "id;spam;GoodWordInSubject;GoodWordInText;BadWordInSubject;BadWordInText\n";
+            String header =
+                    "id;" +
+                            "spam;" +
+                            "GoodWordInSubject;" +
+                            "GoodWordInText;" +
+                            "BadWordInSubject;" +
+                            "BadWordInText;" +
+                            "AverageSentenceLength;" +
+                            "MaximumSentenceLength;" +
+                            "BiggerThanAverageSubjectLength;" +
+                            "BiggerThanAverageTextLength\n";
             writer.write(header);
             for (Mail mail : data) {
-                writer.write(mail.toAnalyticCsv() + "\n");
+                writer.write(mail.toCsvString() + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
