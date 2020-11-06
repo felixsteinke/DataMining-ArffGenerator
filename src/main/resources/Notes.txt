@@ -1,0 +1,15 @@
+char freq von ! und ? % zur wort Menge.
+wird @attribute class automatisch als Ziel Klasse ausgewaehlt?
+
+Zielformat
+% Comment
+% Titel mit
+@relation spambase
+% Arttibute mit
+@attribute Name REAL
+@attribute Name NUMERIC
+@attribute Name STRING (wenig sinnvoll)
+@attribute Name DATE yyyy-MM-dd'T'HH:mm:ss
+% Das Ziel Attribut mit (denk ich mal)
+@attribute class {0,1}
+% 0,1 kann durch viele verschiedene texte ersetzt werden z.B. {Iris-setosa,Iris-versicolor,Iris-virginica}
