@@ -67,7 +67,8 @@ public class CostumFileWriter {
 
         for (Mail mail: Mails) {
             System.out.println("neuer thred MailProcessor");
-            Runnable mailProcessor = () -> {mail.fillBoolWordLists(whitelistwords,blacklistwords);};
+            Runnable mailProcessor = () -> {mail.fillBoolWordLists(whitelistwords,blacklistwords);
+                System.out.println("Mail: "+mail.id+" wurde fertig Bearbeitet.");};
             executor.execute(mailProcessor);
         }
         executor.shutdown();

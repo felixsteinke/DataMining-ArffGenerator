@@ -564,3 +564,5 @@
 @attribute plant_in_Subject
 @attribute pipe_in_Subject
 @attribute conversation_in_Subject
+@attribute  class {0,1}
+
