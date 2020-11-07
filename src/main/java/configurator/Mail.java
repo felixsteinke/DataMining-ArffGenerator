@@ -163,6 +163,38 @@ public class Mail {
 
 
     /*
+    Data Converter
+     */
+
+    public String getConvertedBoolArrays() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(boolListConverter(whiteWordInSub));
+        stringBuilder.append(boolListConverter(whiteWordInText));
+        stringBuilder.append(boolListConverter(blackWordInSub));
+        stringBuilder.append(boolListConverter(blackWordInText));
+        stringBuilder.append(boolConverter(spam));
+        stringBuilder.replace(stringBuilder.length() - 1, stringBuilder.length(), ""); //remove , from last in line
+        stringBuilder.append("\n"); //new line
+        return stringBuilder.toString();
+    }
+
+    private String boolListConverter(ArrayList<Boolean> list) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (boolean bool : whiteWordInText) {
+            stringBuilder.append(boolConverter(bool) + ",");
+        }
+        return stringBuilder.toString();
+    }
+
+    private int boolConverter(boolean bool) {
+        if (bool) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /*
     Getter
      */
 
@@ -225,4 +257,5 @@ public class Mail {
     public boolean isSpam(){
         return this.spam;
     }
+
 }

@@ -88,29 +88,7 @@ public class CostumFileWriter {
         System.out.println("Finished all threads");
 
         for (Mail mail: Mails) {
-            for (boolean winSub : mail.whiteWordInSub) {
-                dataListAppander(winSub);
-            }
-            for (boolean winTxt : mail.whiteWordInText) {
-                dataListAppander(winTxt);
-            }
-            for (boolean binSub : mail.blackWordInSub) {
-                dataListAppander(binSub);
-            }
-            for (boolean binTxt : mail.blackWordInText){
-                dataListAppander(binTxt);
-            }
-            dataListAppander(mail.isSpam());
-            stringBuilder.replace(stringBuilder.length()-1,stringBuilder.length(),""); //remove , from last in line
-            stringBuilder.append(nl);
-        }
-    }
-
-    private static void dataListAppander(boolean in){
-        if (in) {
-            stringBuilder.append("1,");
-        } else {
-            stringBuilder.append("0,");
+            stringBuilder.append(mail.getConvertedBoolArrays());
         }
     }
 }
