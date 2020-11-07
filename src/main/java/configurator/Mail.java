@@ -10,10 +10,12 @@ public class Mail {
     private final String subject;
     private final String text;
     private final boolean spam;
+
     public ArrayList<Boolean> blackWordInText;
     public ArrayList<Boolean> whiteWordInText;
     public ArrayList<Boolean> blackWordInSub;
     public ArrayList<Boolean> whiteWordInSub;
+
     private boolean withWhiteListWordInSubject;
     private boolean withWhiteListWordInText;
     private boolean withBlackListWordInSubject;
@@ -43,26 +45,9 @@ public class Mail {
 
         this.averageSentenceLength = 0;
         this.maximumSentenceLength = 0;
-        processSentenceAnalysis();
 
         this.biggerThanAverageSubjectLength = false;
         this.biggerThanAverageTextLength = false;
-    }
-
-    private void processSentenceAnalysis() {
-        ArrayList<Integer> sentenceLengths = new ArrayList<>();
-        for (int start = 0; start <= text.length(); ) {
-            int end = calculateNextSentenceLength(start, this.text);
-            sentenceLengths.add(end - start);
-            start = end;
-        }
-        for (int length : sentenceLengths) {
-            averageSentenceLength += length;
-            if (length > maximumSentenceLength) {
-                maximumSentenceLength = length;
-            }
-        }
-        averageSentenceLength /= sentenceLengths.size();
     }
 
     public void processAnalytics(ArrayList<String> whiteList, ArrayList<String> blackList, int averageSubjectLength, int averageTextLength) {
@@ -71,6 +56,7 @@ public class Mail {
 
         processAnalyticAverageLengths(averageSubjectLength, averageTextLength);
     }
+
 
     public void processAnalyticWhiteList(ArrayList<String> whiteList) {
         for (String goodWord : whiteList) {
@@ -132,6 +118,21 @@ public class Mail {
         return matcher.find();
     }
 
+    private void processAnalyticSentence() {
+        ArrayList<Integer> sentenceLengths = new ArrayList<>();
+        for (int start = 0; start <= text.length(); ) {
+            int end = calculateNextSentenceLength(start, this.text);
+            sentenceLengths.add(end - start);
+            start = end;
+        }
+        for (int length : sentenceLengths) {
+            averageSentenceLength += length;
+            if (length > maximumSentenceLength) {
+                maximumSentenceLength = length;
+            }
+        }
+        averageSentenceLength /= sentenceLengths.size();
+    }
 
     private int calculateNextSentenceLength(int index, String text) {
         char[] charText = text.toCharArray();
@@ -181,6 +182,22 @@ public class Mail {
 
     public String getText() {
         return text;
+    }
+
+    public ArrayList<Boolean> getBlackWordInText() {
+        return blackWordInText;
+    }
+
+    public ArrayList<Boolean> getWhiteWordInText() {
+        return whiteWordInText;
+    }
+
+    public ArrayList<Boolean> getBlackWordInSub() {
+        return blackWordInSub;
+    }
+
+    public ArrayList<Boolean> getWhiteWordInSub() {
+        return whiteWordInSub;
     }
 
     public boolean isWithWhiteListWordInSubject() {
