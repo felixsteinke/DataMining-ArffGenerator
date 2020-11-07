@@ -55,6 +55,8 @@ public class Mail {
         processAnalyticBlackList(blackList);
 
         processAnalyticAverageLengths(averageSubjectLength, averageTextLength);
+
+        processAnalyticSentence();
     }
 
 
@@ -103,12 +105,13 @@ public class Mail {
         return matcher.find();
     }
 
-    private void processAnalyticSentence() {
+    public void processAnalyticSentence() {
         ArrayList<Integer> sentenceLengths = new ArrayList<>();
-        for (int start = 0; start <= text.length(); ) {
-            int end = calculateNextSentenceLength(start, this.text);
+        int textLength = text.length();
+        for (int start = 0; start < textLength; ) {
+            int end = calculateNextSentenceLength(start, text);
             sentenceLengths.add(end - start);
-            start = end;
+            start = end + 1;
         }
         for (int length : sentenceLengths) {
             averageSentenceLength += length;
@@ -121,7 +124,7 @@ public class Mail {
 
     private int calculateNextSentenceLength(int index, String text) {
         char[] charText = text.toCharArray();
-        for (; index <= charText.length; index++) {
+        for (; index < charText.length; index++) {
             if (charText[index] == '.') {
                 return index;
             }
@@ -156,6 +159,8 @@ public class Mail {
                 + biggerThanAverageSubjectLength + ";"
                 + biggerThanAverageTextLength;
     }
+
+
 
     /*
     Getter

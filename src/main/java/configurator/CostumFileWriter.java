@@ -107,9 +107,9 @@ public class CostumFileWriter {
     }
 
     private static void dataListAppander(boolean in){
-        if (in){
+        if (in) {
             stringBuilder.append("1,");
-        }else{
+        } else {
             stringBuilder.append("0,");
         }
     }
