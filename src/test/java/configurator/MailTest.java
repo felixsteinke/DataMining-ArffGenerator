@@ -11,8 +11,8 @@ import java.util.ArrayList;
 class MailTest {
 
     static DataProvider dataProvider;
-    Mail testMailClean;
-    Mail testMailTrash;
+    Mail testMailWhite;
+    Mail testMailBlack;
 
     @BeforeAll
     static void setUpData() {
@@ -21,16 +21,16 @@ class MailTest {
 
     @BeforeEach
     void prepareMail() {
-        testMailClean = new Mail(
+        testMailWhite = new Mail(
                 123,
                 "Subject to for meeting",
-                "Text with some useless lines.",
+                "Text with some uselessMeeting lines.Text with some uselessMeeting lines.",
                 false
         );
-        testMailTrash = new Mail(
+        testMailBlack = new Mail(
                 1,
                 "Sexmachine",
-                "I want to check this text. Long sentence without any symbol in between",
+                "I want to check this text. Long sentence without any symbol in between but with sexy things",
                 true
         );
     }
@@ -38,28 +38,50 @@ class MailTest {
     @Test
     void processAnalyticWhiteList() {
         ArrayList<String> whiteList = dataProvider.getWhiteListedWords();
-        testMailClean.processAnalyticWhiteList(whiteList);
-        int whiteListIndex = -1;
-        for (int i = 0; i < whiteList.size(); i++) {
-            String word = whiteList.get(i);
-            if (word.equalsIgnoreCase("meeting")) {
-                whiteListIndex = i;
-            }
-        }
-        Assertions.assertTrue(testMailClean.getWhiteWordInSub().get(whiteListIndex));
+        int listIndex = getWordIndex(whiteList, "meeting");
+
+        testMailWhite.processAnalyticWhiteList(whiteList);
+
+        Assertions.assertTrue(testMailWhite.getWhiteWordInSub().get(listIndex));
+        Assertions.assertTrue(testMailWhite.isWithWhiteListWordInSubject());
+        Assertions.assertTrue(testMailWhite.getWhiteWordInText().get(listIndex));
+        Assertions.assertTrue(testMailWhite.isWithWhiteListWordInText());
     }
 
     @Test
     void processAnalyticBlackList() {
+        ArrayList<String> blackList = dataProvider.getBlackListedWords();
+        int listIndex = getWordIndex(blackList, "sex");
+
+        testMailBlack.processAnalyticBlackList(blackList);
+
+        Assertions.assertTrue(testMailBlack.getBlackWordInSub().get(listIndex));
+        Assertions.assertTrue(testMailBlack.isWithBlackListWordInSubject());
+        Assertions.assertTrue(testMailBlack.getBlackWordInText().get(listIndex));
+        Assertions.assertTrue(testMailBlack.isWithBlackListWordInText());
+
+
     }
 
     @Test
-    void fillBoolWordLists() {
+    void processAnalyticSentence() {
+        testMailWhite.processAnalyticSentence();
+        Assertions.assertEquals(35, testMailWhite.getAverageSentenceLength());
+        Assertions.assertEquals(35, testMailWhite.getMaximumSentenceLength());
 
+        testMailBlack.processAnalyticSentence();
+        Assertions.assertEquals(45, testMailBlack.getAverageSentenceLength());
+        Assertions.assertEquals(65, testMailBlack.getMaximumSentenceLength());
     }
 
-    @Test
-    void toCsvString() {
-
+    private int getWordIndex(ArrayList<String> list, String word) {
+        for (int i = 0; i < list.size(); i++) {
+            String element = list.get(i);
+            if (element.equalsIgnoreCase(word)) {
+                return i;
+            }
+        }
+        return -1;
     }
+
 }
