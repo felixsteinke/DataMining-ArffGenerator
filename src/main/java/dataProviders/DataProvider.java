@@ -22,6 +22,9 @@ public class DataProvider {
     }
 
     private void calculateAverageValues() {
+        averageSubjectLength = 0;
+        averageTextLength = 0;
+
         for (Mail mail : mails) {
             averageSubjectLength += mail.getSubject().length();
             averageTextLength += mail.getText().length();
@@ -30,6 +33,9 @@ public class DataProvider {
         averageTextLength /= mails.size();
     }
 
+    /*
+    Get Data
+     */
     public ArrayList<Mail> getMails() {
         return mails;
     }
@@ -42,6 +48,9 @@ public class DataProvider {
         return blackListedWords;
     }
 
+    /*
+    Get Values
+     */
     public int getAverageSubjectLength() {
         return averageSubjectLength;
     }
@@ -50,6 +59,9 @@ public class DataProvider {
         return averageTextLength;
     }
 
+    /*
+    Output
+     */
     public void writeMailAnalytic() {
         CsvUtility.writeCsvFile("src/main/resources/analytic.csv", mails);
     }

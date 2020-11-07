@@ -1,12 +1,16 @@
 package configurator;
 
-import org.junit.jupiter.api.BeforeEach;
+import dataProviders.DataProvider;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class MailTest {
 
-    @BeforeEach
+    DataProvider dataProvider;
+
+    @BeforeAll
     void setUp() {
+        DataProvider dataProvider = new DataProvider();
     }
 
     @Test
