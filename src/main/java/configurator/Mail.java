@@ -216,4 +216,8 @@ public class Mail {
     public boolean isBiggerThanAverageTextLength() {
         return biggerThanAverageTextLength;
     }
+
+    public boolean isSpam(){
+        return this.spam;
+    }
 }

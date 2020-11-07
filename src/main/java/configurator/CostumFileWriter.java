@@ -13,12 +13,13 @@ public class CostumFileWriter {
 
     private static final StringBuilder stringBuilder = new StringBuilder();
     private static final DataProvider dataProvider = new DataProvider();
+    public static int number = 0;
 
     private static final String a = "@attribute ";
-    private static final String iT = "_in_Text";
-    private static final String iS = "_in_Subject";
+    private static final String iT = "_in_Text ";
+    private static final String iS = "_in_Subject ";
     private static final String r = "@relation spamGruppeF";
-    private static final String n = "numeric";
+    private static final String data = "integer";
     private static final String d = "@data";
     private static final String file = "src/main/resources/GruppeF.arff";
     private static final String nl = "\n";
@@ -29,9 +30,9 @@ public class CostumFileWriter {
         stringBuilder.append(nl);
         stringBuilder.append(nl);
 
-        appendAttributeFromListAs(dataProvider.getBlackListedWords(), iT);
-        appendAttributeFromListAs(dataProvider.getBlackListedWords(), iS);
-        appendAttributeFromListAs(dataProvider.getWhiteListedWords(), iT);
+        appendAttributeFromListAs(dataProvider.getBlackListedWords(),iT);
+        appendAttributeFromListAs(dataProvider.getBlackListedWords(),iS);
+        appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iT);
         appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iS);
 
         stringBuilder.append(a + "class {0,1}");
@@ -39,7 +40,7 @@ public class CostumFileWriter {
         stringBuilder.append(nl);
         stringBuilder.append(nl);
 
-        appendData();
+        //appendData();
 
         String result = stringBuilder.toString();
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))){
@@ -53,9 +54,13 @@ public class CostumFileWriter {
     private static void appendAttributeFromListAs(ArrayList<String> wordList,String context){
         for (String word: wordList) {
             stringBuilder.append(a);
-            word.replaceAll("\\s","_");
+            stringBuilder.append(number);
+            number++;
+            word = word.replaceAll("\\s","_");
+            word = word.replaceAll("%","");
             stringBuilder.append(word);
             stringBuilder.append(context);
+            stringBuilder.append(data);
             stringBuilder.append(nl);
         }
     }
@@ -95,6 +100,7 @@ public class CostumFileWriter {
             for (boolean binTxt : mail.blackWordInText){
                 dataListAppander(binTxt);
             }
+            dataListAppander(mail.isSpam());
             stringBuilder.replace(stringBuilder.length()-1,stringBuilder.length(),""); //remove , from last in line
             stringBuilder.append(nl);
         }
