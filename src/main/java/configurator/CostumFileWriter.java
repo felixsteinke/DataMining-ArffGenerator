@@ -2,24 +2,26 @@ package configurator;
 
 import dataProviders.DataProvider;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CostumFileWriter {
 
-    private static StringBuilder stringBuilder = new StringBuilder();
-    private static DataProvider dataProvider = new DataProvider();
+    private static final StringBuilder stringBuilder = new StringBuilder();
+    private static final DataProvider dataProvider = new DataProvider();
 
-    private static String a = "@attribute ";
-    private static String iT = "_in_Text";
-    private static String iS = "_in_Subject";
-    private static String r = "@relation spamGruppeF";
-    private static String n = "numeric";
-    private static String d = "@data";
-    private static String file = "src/main/resources/GruppeF.arff";
-    private static String nl = "\n";
+    private static final String a = "@attribute ";
+    private static final String iT = "_in_Text";
+    private static final String iS = "_in_Subject";
+    private static final String r = "@relation spamGruppeF";
+    private static final String n = "numeric";
+    private static final String d = "@data";
+    private static final String file = "src/main/resources/GruppeF.arff";
+    private static final String nl = "\n";
 
     public static void main(String[] args) {
 
@@ -27,9 +29,9 @@ public class CostumFileWriter {
         stringBuilder.append(nl);
         stringBuilder.append(nl);
 
-        appendAttributeFromListAs(dataProvider.getBlackListedWords(),iT);
-        appendAttributeFromListAs(dataProvider.getBlackListedWords(),iS);
-        appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iT);
+        appendAttributeFromListAs(dataProvider.getBlackListedWords(), iT);
+        appendAttributeFromListAs(dataProvider.getBlackListedWords(), iS);
+        appendAttributeFromListAs(dataProvider.getWhiteListedWords(), iT);
         appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iS);
 
         stringBuilder.append(a + "class {0,1}");
@@ -70,8 +72,10 @@ public class CostumFileWriter {
 
         for (Mail mail: Mails) {
             System.out.println("neuer thred MailProcessor");
-            Runnable mailProcessor = () -> {mail.fillBoolWordLists(whitelistwords,blacklistwords);
-                System.out.println("Mail: "+mail.id+" wurde fertig Bearbeitet.");};
+            Runnable mailProcessor = () -> {
+                mail.processAnalytics(whitelistwords, blacklistwords, dataProvider.getAverageSubjectLength(), dataProvider.getAverageTextLength());
+                System.out.println("Mail: " + mail.id + " wurde fertig Bearbeitet.");
+            };
             executor.execute(mailProcessor);
         }
         executor.shutdown();

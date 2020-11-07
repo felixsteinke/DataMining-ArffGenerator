@@ -60,53 +60,38 @@ public class Mail {
 
     public void processAnalyticWhiteList(ArrayList<String> whiteList) {
         for (String goodWord : whiteList) {
+            //Subject
             if (sourceMatchesWord(this.subject, goodWord)) {
+                this.whiteWordInSub.add(true);
                 withWhiteListWordInSubject = true;
-                return;
+            } else {
+                this.whiteWordInSub.add(false);
             }
+
             if (sourceMatchesWord(this.text, goodWord)) {
+                this.whiteWordInText.add(true);
                 withWhiteListWordInText = true;
-                return;
+            } else {
+                this.whiteWordInText.add(false);
             }
         }
     }
 
     public void processAnalyticBlackList(ArrayList<String> blackList) {
         for (String badWord : blackList) {
-            if (sourceMatchesWord(this.subject, badWord)) {
-                withBlackListWordInSubject = true;
-                return;
-            }
-            if (sourceMatchesWord(this.text, badWord)) {
-                withBlackListWordInText = true;
-                return;
-            }
-        }
-    }
-
-    public void fillBoolWordLists(ArrayList<String> whiteList, ArrayList<String> blackList) {
-        for (String badWord : blackList) {
+            //Subject
             if (sourceMatchesWord(this.subject, badWord)) {
                 this.blackWordInSub.add(true);
+                withBlackListWordInSubject = true;
             } else {
                 this.blackWordInSub.add(false);
             }
+            //Text
             if (sourceMatchesWord(this.text, badWord)) {
                 this.blackWordInText.add(true);
+                withBlackListWordInText = true;
             } else {
                 this.blackWordInText.add(false);
-            }
-        }
-        for (String goodWord : whiteList) {
-            if (sourceMatchesWord(this.subject, goodWord)) {
-                this.whiteWordInSub.add(true);
-            } else {
-                this.whiteWordInSub.add(false);
-            }
-            if (sourceMatchesWord(this.text, goodWord)) {
-                this.whiteWordInText.add(true);
-            } else {
-                this.whiteWordInText.add(false);
             }
         }
     }

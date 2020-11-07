@@ -23,7 +23,7 @@ class MailTest {
     void prepareMail() {
         testMailClean = new Mail(
                 123,
-                "Subject to for contracts",
+                "Subject to for meeting",
                 "Text with some useless lines.",
                 false
         );
@@ -42,7 +42,7 @@ class MailTest {
         int whiteListIndex = -1;
         for (int i = 0; i < whiteList.size(); i++) {
             String word = whiteList.get(i);
-            if (word.equalsIgnoreCase("contract")) {
+            if (word.equalsIgnoreCase("meeting")) {
                 whiteListIndex = i;
             }
         }
