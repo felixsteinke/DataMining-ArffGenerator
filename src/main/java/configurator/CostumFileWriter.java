@@ -4,6 +4,8 @@ import dataProviders.DataProvider;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CostumFileWriter {
 
@@ -61,6 +63,15 @@ public class CostumFileWriter {
         ArrayList<String> whitelistwords = dataProvider.getWhiteListedWords();
         ArrayList<Mail> Mails = dataProvider.getMails();
 
+        ExecutorService executor = Executors.newFixedThreadPool(12);
 
+        for (Mail mail: Mails) {
+            System.out.println("neuer thred MailProcessor");
+            Runnable mailProcessor = () -> {mail.fillBoolWordLists(whitelistwords,blacklistwords);};
+            executor.execute(mailProcessor);
+        }
+        executor.shutdown();
+        while (!executor.isTerminated()) {   }
+        System.out.println("Finished all threads");
     }
 }

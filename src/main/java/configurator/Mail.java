@@ -6,16 +6,14 @@ import java.util.regex.Pattern;
 
 public class Mail {
 
-    private ArrayList<Boolean> blackWordInText;
-    private ArrayList<Boolean> whiteWordInText;
-    private ArrayList<Boolean> blackWordInSub;
-    private ArrayList<Boolean> whiteWordInSub;
-
     private final int id;
     private final String subject;
     private final String text;
     private final boolean spam;
-
+    private ArrayList<Boolean> blackWordInText;
+    private ArrayList<Boolean> whiteWordInText;
+    private ArrayList<Boolean> blackWordInSub;
+    private ArrayList<Boolean> whiteWordInSub;
     private boolean withWhiteListWordInSubject;
     private boolean withWhiteListWordInText;
     private boolean withBlackListWordInSubject;
@@ -75,6 +73,53 @@ public class Mail {
                 return;
             }
         }
+    }
+
+    public void fillBoolWordLists(ArrayList<String> whiteList, ArrayList<String> blackList) {
+        Runnable blackListProcessor = () -> {
+            System.out.println("neuer thred blackListProcessor");
+            for (String badWord : blackList) {
+                Runnable badInSub = () -> {
+                    if (sourceMatchesWord(this.subject, badWord)) {
+                        this.blackWordInSub.add(true);
+                    } else {
+                        this.blackWordInSub.add(false);
+                    }
+                };
+                new Thread(badInSub).start();
+                Runnable badInTxt = () -> {
+                    if (sourceMatchesWord(this.text, badWord)) {
+                        this.blackWordInText.add(true);
+                    } else {
+                        this.blackWordInText.add(false);
+                    }
+                };
+                new Thread(badInTxt).start();
+            }
+        };
+        new Thread(blackListProcessor).run();
+        Runnable whiteListProcessor = () -> {
+            System.out.println("neuer thred whiteListProcessor");
+            for (String goodWord : whiteList) {
+                Runnable badInSub = () -> {
+                    if (sourceMatchesWord(this.subject, goodWord)) {
+                        this.whiteWordInSub.add(true);
+                    } else {
+                        this.whiteWordInSub.add(false);
+                    }
+                };
+                new Thread(badInSub).start();
+                Runnable badInTxt = () -> {
+                    if (sourceMatchesWord(this.text, goodWord)) {
+                        this.whiteWordInText.add(true);
+                    } else {
+                        this.whiteWordInText.add(false);
+                    }
+                };
+                new Thread(badInTxt).start();
+            }
+        };
+        new Thread(whiteListProcessor).run();
     }
 
     private boolean sourceMatchesWord(String source, String word) {
