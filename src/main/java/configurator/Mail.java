@@ -10,10 +10,10 @@ public class Mail {
     private final String subject;
     private final String text;
     private final boolean spam;
-    private ArrayList<Boolean> blackWordInText;
-    private ArrayList<Boolean> whiteWordInText;
-    private ArrayList<Boolean> blackWordInSub;
-    private ArrayList<Boolean> whiteWordInSub;
+    public ArrayList<Boolean> blackWordInText;
+    public ArrayList<Boolean> whiteWordInText;
+    public ArrayList<Boolean> blackWordInSub;
+    public ArrayList<Boolean> whiteWordInSub;
     private boolean withWhiteListWordInSubject;
     private boolean withWhiteListWordInText;
     private boolean withBlackListWordInSubject;
