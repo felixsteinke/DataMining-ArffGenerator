@@ -180,8 +180,8 @@ public class Mail {
 
     private String boolListConverter(ArrayList<Boolean> list) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (boolean bool : whiteWordInText) {
-            stringBuilder.append(boolConverter(bool) + ",");
+        for (boolean bool : list) {
+            stringBuilder.append(boolConverter(bool)).append(",");
         }
         return stringBuilder.toString();
     }
