@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class CostumFileWriter {
+public class CustomFileWriter {
 
     private static final StringBuilder stringBuilder = new StringBuilder();
-    private static final DataProvider dataProvider = new DataProvider();
     public static int number = 0;
 
     private static final String a = "@attribute ";
@@ -25,39 +24,49 @@ public class CostumFileWriter {
     private static final String nl = "\n";
 
     public static void main(String[] args) {
+        DataProvider dataProvider = new DataProvider();
+        new CustomFileWriter().execute(
+                dataProvider.getMails(),
+                dataProvider.getBlackListedWords(),
+                dataProvider.getWhiteListedWords(),
+                dataProvider.getAverageSubjectLength(),
+                dataProvider.getAverageTextLength());
+    }
 
+
+    public void execute(ArrayList<Mail> mails, ArrayList<String> blackList, ArrayList<String> whiteList, int averageSubjectLength, int averageTextLength) {
         stringBuilder.append(r);
         stringBuilder.append(nl);
         stringBuilder.append(nl);
 
-        appendAttributeFromListAs(dataProvider.getBlackListedWords(),iT);
-        appendAttributeFromListAs(dataProvider.getBlackListedWords(),iS);
-        appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iT);
-        appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iS);
+        appendAttributeFromListAs(blackList, iT);
+        appendAttributeFromListAs(blackList, iS);
+        appendAttributeFromListAs(whiteList, iT);
+        appendAttributeFromListAs(whiteList, iS);
 
         stringBuilder.append(a + "class {0,1}");
 
         stringBuilder.append(nl);
         stringBuilder.append(nl);
 
-        //appendData();
+        appendData(mails, blackList, whiteList, averageSubjectLength, averageTextLength);
 
         String result = stringBuilder.toString();
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))){
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(result);
             bufferedWriter.flush();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void appendAttributeFromListAs(ArrayList<String> wordList,String context){
-        for (String word: wordList) {
+    private void appendAttributeFromListAs(ArrayList<String> wordList, String context) {
+        for (String word : wordList) {
             stringBuilder.append(a);
             stringBuilder.append(number);
             number++;
-            word = word.replaceAll("\\s","_");
-            word = word.replaceAll("%","");
+            word = word.replaceAll("\\s", "_");
+            word = word.replaceAll("%", "");
             stringBuilder.append(word);
             stringBuilder.append(context);
             stringBuilder.append(data);
@@ -65,29 +74,33 @@ public class CostumFileWriter {
         }
     }
 
-    private static void appendData(){
-        ArrayList<String> blacklistwords = dataProvider.getBlackListedWords();
-        ArrayList<String> whitelistwords = dataProvider.getWhiteListedWords();
-        ArrayList<Mail> Mails = dataProvider.getMails();
+    private void appendData(ArrayList<Mail> mails, ArrayList<String> blackList, ArrayList<String> whiteList, int averageSubjectLength, int averageTextLength) {
 
         stringBuilder.append(d);
         stringBuilder.append(nl);
 
         ExecutorService executor = Executors.newFixedThreadPool(11);
 
-        for (Mail mail: Mails) {
+        for (Mail mail : mails) {
             System.out.println("neuer thred MailProcessor");
             Runnable mailProcessor = () -> {
-                mail.processAnalytics(whitelistwords, blacklistwords, dataProvider.getAverageSubjectLength(), dataProvider.getAverageTextLength());
+                mail.processAnalytics(whiteList, blackList, averageSubjectLength, averageTextLength);
                 System.out.println("Mail: " + mail.id + " wurde fertig Bearbeitet.");
             };
             executor.execute(mailProcessor);
         }
         executor.shutdown();
-        while (!executor.isTerminated()) {   }
+
+        while (!executor.isTerminated()) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ignored) {
+            }
+        }
+
         System.out.println("Finished all threads");
 
-        for (Mail mail: Mails) {
+        for (Mail mail : mails) {
             stringBuilder.append(mail.getConvertedBoolArrays());
         }
     }
