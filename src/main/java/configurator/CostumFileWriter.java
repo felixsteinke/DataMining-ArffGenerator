@@ -30,6 +30,13 @@ public class CostumFileWriter {
         appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iT);
         appendAttributeFromListAs(dataProvider.getWhiteListedWords(),iS);
 
+        stringBuilder.append(a + " class {0,1}");
+
+        stringBuilder.append(nl);
+        stringBuilder.append(nl);
+
+        appendData();
+
         String result = stringBuilder.toString();
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))){
             bufferedWriter.write(result);
@@ -42,10 +49,18 @@ public class CostumFileWriter {
     private static void appendAttributeFromListAs(ArrayList<String> wordList,String context){
         for (String word: wordList) {
             stringBuilder.append(a);
-            //TODO remove whitespace from word
+            word.replaceAll("\\s","_");
             stringBuilder.append(word);
             stringBuilder.append(context);
             stringBuilder.append(nl);
         }
+    }
+
+    private static void appendData(){
+        ArrayList<String> blacklistwords = dataProvider.getBlackListedWords();
+        ArrayList<String> whitelistwords = dataProvider.getWhiteListedWords();
+        ArrayList<Mail> Mails = dataProvider.getMails();
+
+
     }
 }

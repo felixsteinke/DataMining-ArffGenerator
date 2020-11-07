@@ -6,6 +6,11 @@ import java.util.regex.Pattern;
 
 public class Mail {
 
+    private ArrayList<Boolean> blackWordInText;
+    private ArrayList<Boolean> whiteWordInText;
+    private ArrayList<Boolean> blackWordInSub;
+    private ArrayList<Boolean> whiteWordInSub;
+
     private final int id;
     private final String subject;
     private final String text;
