@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class ArffTest {
 
     static DataProvider dataProvider;
-    Mail testMailWhite;
-    Mail testMailBlack;
-    ArrayList<Mail> testMails;
+    static Mail testMailWhite;
+    static Mail testMailBlack;
+    static ArrayList<Mail> testMails;
 
     @BeforeAll
     static void setUpData() {
@@ -33,6 +33,7 @@ public class ArffTest {
                 "I want to check this text. Long sentence without any symbol in between but with sexy things",
                 true
         );
+        testMails = new ArrayList<>();
         testMails.add(testMailWhite);
         testMails.add(testMailBlack);
     }

@@ -173,7 +173,6 @@ public class Mail {
         stringBuilder.append(boolListConverter(blackWordInSub));
         stringBuilder.append(boolListConverter(blackWordInText));
         stringBuilder.append(boolConverter(spam));
-        stringBuilder.replace(stringBuilder.length() - 1, stringBuilder.length(), ""); //remove , from last in line
         stringBuilder.append("\n"); //new line
         return stringBuilder.toString();
     }
