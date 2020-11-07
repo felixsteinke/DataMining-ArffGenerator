@@ -41,10 +41,28 @@ public class Mail {
         this.withBlackListWordInSubject = false;
         this.withBlackListWordInText = false;
 
+        this.averageSentenceLength = 0;
+        this.maximumSentenceLength = 0;
         processSentenceAnalysis();
 
         this.biggerThanAverageSubjectLength = false;
         this.biggerThanAverageTextLength = false;
+    }
+
+    private void processSentenceAnalysis() {
+        ArrayList<Integer> sentenceLengths = new ArrayList<>();
+        for (int start = 0; start <= text.length(); ) {
+            int end = calculateNextSentenceLength(start, this.text);
+            sentenceLengths.add(end - start);
+            start = end;
+        }
+        for (int length : sentenceLengths) {
+            averageSentenceLength += length;
+            if (length > maximumSentenceLength) {
+                maximumSentenceLength = length;
+            }
+        }
+        averageSentenceLength /= sentenceLengths.size();
     }
 
     public void processAnalytics(ArrayList<String> whiteList, ArrayList<String> blackList, int averageSubjectLength, int averageTextLength) {
@@ -114,10 +132,15 @@ public class Mail {
         return matcher.find();
     }
 
-    private void processSentenceAnalysis() {
-        //TODO
-        this.averageSentenceLength = -1;
-        this.maximumSentenceLength = -1;
+
+    private int calculateNextSentenceLength(int index, String text) {
+        char[] charText = text.toCharArray();
+        for (; index <= charText.length; index++) {
+            if (charText[index] == '.') {
+                return index;
+            }
+        }
+        return charText.length;
     }
 
 

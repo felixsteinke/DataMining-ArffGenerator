@@ -19,7 +19,7 @@ public class Main {
                     manager.getAverageSubjectLength(),
                     manager.getAverageTextLength());
             mailCounter++;
-            if ((mailCounter % 100) == 0) {
+            if ((mailCounter % 1) == 0) {
                 System.out.println("[INFO] Progress at " + mailCounter + " from " + mails.size());
             }
         }
