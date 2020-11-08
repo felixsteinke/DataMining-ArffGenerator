@@ -1,5 +1,6 @@
 package configurator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -119,7 +120,12 @@ public class Mail {
                 maximumSentenceLength = length;
             }
         }
-        averageSentenceLength /= sentenceLengths.size();
+        try {
+            averageSentenceLength /= sentenceLengths.size();
+        } catch (Exception e) {
+            averageSentenceLength = 0;
+            System.out.println("[INFO] Mail: "+ this.id +" hat kein Text.");
+        }
     }
 
     private int calculateNextSentenceLength(int index, String text) {
