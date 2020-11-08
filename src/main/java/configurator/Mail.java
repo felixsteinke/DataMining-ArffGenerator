@@ -205,16 +205,4 @@ public class Mail {
         return maximumSentenceLength;
     }
 
-    public boolean isBiggerThanAverageSubjectLength() {
-        return biggerThanAverageSubjectLength;
-    }
-
-    public boolean isBiggerThanAverageTextLength() {
-        return biggerThanAverageTextLength;
-    }
-
-    public boolean isSpam(){
-        return this.spam;
-    }
-
 }
