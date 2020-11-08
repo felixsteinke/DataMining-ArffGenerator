@@ -5,6 +5,8 @@ import dataProviders.DataProvider;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,6 +26,7 @@ public class CustomFileWriter {
     private static final String nl = "\n";
 
     public static void main(String[] args) {
+        Instant start = Instant.now();
         DataProvider dataProvider = new DataProvider();
         new CustomFileWriter().execute(
                 dataProvider.getMails(),
@@ -31,6 +34,11 @@ public class CustomFileWriter {
                 dataProvider.getWhiteListedWords(),
                 dataProvider.getAverageSubjectLength(),
                 dataProvider.getAverageTextLength());
+        Instant finish = Instant.now();
+        long minutes = Duration.between(start, finish).toMinutes();
+        long seconds = Duration.between(start,finish).toSecondsPart();
+        long millis = Duration.between(start,finish).toMillisPart();
+        System.out.println("Es sind seit Start: "+minutes+"min "+seconds+"s "+millis+"millis vergangen.");
     }
 
 
