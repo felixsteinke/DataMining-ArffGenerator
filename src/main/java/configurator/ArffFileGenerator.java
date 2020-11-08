@@ -90,7 +90,7 @@ public class ArffFileGenerator {
     private void appendData(ArrayList<Mail> mails, ArrayList<String> blackList, ArrayList<String> whiteList, int averageSubjectLength, int averageTextLength) {
         stringBuilder.append(dataAnnotation).append(newLine);
 
-        ExecutorService executor = Executors.newFixedThreadPool(11);
+        ExecutorService executor = Executors.newFixedThreadPool(12);
 
         for (Mail mail : mails) {
             System.out.println("neuer Thread MailProcessor");
