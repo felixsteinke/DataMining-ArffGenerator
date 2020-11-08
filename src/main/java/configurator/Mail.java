@@ -1,6 +1,5 @@
 package configurator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,11 +15,6 @@ public class Mail {
     public ArrayList<Boolean> whiteWordInText;
     public ArrayList<Boolean> blackWordInSub;
     public ArrayList<Boolean> whiteWordInSub;
-
-    private boolean withWhiteListWordInSubject;
-    private boolean withWhiteListWordInText;
-    private boolean withBlackListWordInSubject;
-    private boolean withBlackListWordInText;
 
     private int averageSentenceLength;
     private int maximumSentenceLength;
@@ -38,11 +32,6 @@ public class Mail {
         this.blackWordInText = new ArrayList<>();
         this.whiteWordInSub = new ArrayList<>();
         this.whiteWordInText = new ArrayList<>();
-
-        this.withWhiteListWordInSubject = false;
-        this.withWhiteListWordInText = false;
-        this.withBlackListWordInSubject = false;
-        this.withBlackListWordInText = false;
 
         this.averageSentenceLength = 0;
         this.maximumSentenceLength = 0;
@@ -66,14 +55,12 @@ public class Mail {
             //Subject
             if (sourceMatchesWord(this.subject, goodWord)) {
                 this.whiteWordInSub.add(true);
-                withWhiteListWordInSubject = true;
             } else {
                 this.whiteWordInSub.add(false);
             }
 
             if (sourceMatchesWord(this.text, goodWord)) {
                 this.whiteWordInText.add(true);
-                withWhiteListWordInText = true;
             } else {
                 this.whiteWordInText.add(false);
             }
@@ -85,14 +72,12 @@ public class Mail {
             //Subject
             if (sourceMatchesWord(this.subject, badWord)) {
                 this.blackWordInSub.add(true);
-                withBlackListWordInSubject = true;
             } else {
                 this.blackWordInSub.add(false);
             }
             //Text
             if (sourceMatchesWord(this.text, badWord)) {
                 this.blackWordInText.add(true);
-                withBlackListWordInText = true;
             } else {
                 this.blackWordInText.add(false);
             }
@@ -147,28 +132,6 @@ public class Mail {
     }
 
     /*
-    toString
-     */
-
-    public String toCsvString() {
-        return id + ";"
-                + spam + ";"
-
-                + withWhiteListWordInSubject + ";"
-                + withWhiteListWordInText + ";"
-                + withBlackListWordInSubject + ";"
-                + withBlackListWordInText + ";"
-
-                + averageSentenceLength + ";"
-                + maximumSentenceLength + ";"
-
-                + biggerThanAverageSubjectLength + ";"
-                + biggerThanAverageTextLength;
-    }
-
-
-
-    /*
     Data Converter
      */
 
@@ -178,6 +141,13 @@ public class Mail {
         stringBuilder.append(boolListConverter(whiteWordInText));
         stringBuilder.append(boolListConverter(blackWordInSub));
         stringBuilder.append(boolListConverter(blackWordInText));
+
+        stringBuilder.append(averageSentenceLength).append(",");
+        stringBuilder.append(maximumSentenceLength).append(",");
+
+        stringBuilder.append(boolConverter(biggerThanAverageSubjectLength)).append(",");
+        stringBuilder.append(boolConverter(biggerThanAverageTextLength)).append(",");
+
         stringBuilder.append(boolConverter(spam));
         stringBuilder.append("\n"); //new line
         return stringBuilder.toString();
@@ -225,22 +195,6 @@ public class Mail {
 
     public ArrayList<Boolean> getWhiteWordInSub() {
         return whiteWordInSub;
-    }
-
-    public boolean isWithWhiteListWordInSubject() {
-        return withWhiteListWordInSubject;
-    }
-
-    public boolean isWithWhiteListWordInText() {
-        return withWhiteListWordInText;
-    }
-
-    public boolean isWithBlackListWordInSubject() {
-        return withBlackListWordInSubject;
-    }
-
-    public boolean isWithBlackListWordInText() {
-        return withBlackListWordInText;
     }
 
     public int getAverageSentenceLength() {

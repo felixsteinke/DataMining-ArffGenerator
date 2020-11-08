@@ -40,7 +40,7 @@ public class ArffTest {
 
     @Test
     void processAnalyticWhiteList() {
-        new CustomFileWriter().execute(
+        new ArffFileGenerator().execute(
                 testMails,
                 dataProvider.getBlackListedWords(),
                 dataProvider.getWhiteListedWords(),

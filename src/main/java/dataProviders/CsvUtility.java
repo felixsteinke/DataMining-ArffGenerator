@@ -2,7 +2,9 @@ package dataProviders;
 
 import configurator.Mail;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CsvUtility {
@@ -39,28 +41,6 @@ public class CsvUtility {
             e.printStackTrace();
         }
         return result;
-    }
-
-    public static void writeCsvFile(String pathToFile, ArrayList<Mail> data) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
-            String header =
-                    "id;" +
-                            "spam;" +
-                            "GoodWordInSubject;" +
-                            "GoodWordInText;" +
-                            "BadWordInSubject;" +
-                            "BadWordInText;" +
-                            "AverageSentenceLength;" +
-                            "MaximumSentenceLength;" +
-                            "BiggerThanAverageSubjectLength;" +
-                            "BiggerThanAverageTextLength\n";
-            writer.write(header);
-            for (Mail mail : data) {
-                writer.write(mail.toCsvString() + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

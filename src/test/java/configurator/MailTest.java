@@ -43,9 +43,7 @@ class MailTest {
         testMailWhite.processAnalyticWhiteList(whiteList);
 
         Assertions.assertTrue(testMailWhite.getWhiteWordInSub().get(listIndex));
-        Assertions.assertTrue(testMailWhite.isWithWhiteListWordInSubject());
         Assertions.assertTrue(testMailWhite.getWhiteWordInText().get(listIndex));
-        Assertions.assertTrue(testMailWhite.isWithWhiteListWordInText());
     }
 
     @Test
@@ -56,9 +54,7 @@ class MailTest {
         testMailBlack.processAnalyticBlackList(blackList);
 
         Assertions.assertTrue(testMailBlack.getBlackWordInSub().get(listIndex));
-        Assertions.assertTrue(testMailBlack.isWithBlackListWordInSubject());
         Assertions.assertTrue(testMailBlack.getBlackWordInText().get(listIndex));
-        Assertions.assertTrue(testMailBlack.isWithBlackListWordInText());
 
 
     }

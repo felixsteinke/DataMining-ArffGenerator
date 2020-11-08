@@ -58,11 +58,4 @@ public class DataProvider {
     public int getAverageTextLength() {
         return averageTextLength;
     }
-
-    /*
-    Output
-     */
-    public void writeMailAnalytic() {
-        CsvUtility.writeCsvFile("src/main/resources/analytic.csv", mails);
-    }
 }
