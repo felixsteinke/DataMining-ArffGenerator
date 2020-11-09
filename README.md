@@ -9,18 +9,18 @@ Siehe in Mail:
 
 Location: src > main > java > configurator > Mail
 
-    spam (Vorgabe)
-
-    blackWordInSub
-    blackWordInText
-    whiteWordInSub
-    whiteWordInText
-
-    this.averageSentenceLength
-    this.maximumSentenceLength
-
-    biggerThanAverageSubjectLength
-    biggerThanAverageTextLength
+        spam (Vorgabe)
+    
+        blackWordInSub
+        blackWordInText
+        whiteWordInSub
+        whiteWordInText
+    
+        this.averageSentenceLength
+        this.maximumSentenceLength
+    
+        biggerThanAverageSubjectLength
+        biggerThanAverageTextLength
 
 
 ## Funktionen des 'ArffFileGenerator'
@@ -76,15 +76,15 @@ __whitelist.csv__
 * Probleme könnte die Java-Version machen. Folgendes muss eventuell in der 'pom.xml' angepasst werden:
     
     
-    < build >
-        < plugins >
-            < plugin >
-                < groupId>org.apache.maven.plugins</groupId >
-                < artifactId>maven-compiler-plugin</artifactId >
-                < configuration >
-                    < source>11</source > <-- Diese Version muss eventuell angepasst werden.
-                    < target>11</target > <-- Diese Version muss eventuell angepasst werden.
-                < /configuration >
-            < /plugin >
-        < /plugins >
-    < /build >
+        < build >
+            < plugins >
+                < plugin >
+                    < groupId>org.apache.maven.plugins</groupId >
+                    < artifactId>maven-compiler-plugin</artifactId >
+                    < configuration >
+                        < source>11</source > <-- Diese Version muss eventuell angepasst werden.
+                        < target>11</target > <-- Diese Version muss eventuell angepasst werden.
+                    < /configuration >
+                < /plugin >
+            < /plugins >
+        < /build >
