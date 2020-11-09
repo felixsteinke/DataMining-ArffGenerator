@@ -3,6 +3,25 @@
 Mitglieder: Steinke Felix,  Grabowski Florian, Fili Leo Marco
 
 
+## Attribute für die '.arff'-File
+
+Siehe in Mail:
+
+Location: src > main > java > configurator > Mail
+
+    spam (Vorgabe)
+
+    blackWordInSub
+    blackWordInText
+    whiteWordInSub
+    whiteWordInText
+
+    this.averageSentenceLength
+    this.maximumSentenceLength
+
+    biggerThanAverageSubjectLength
+    biggerThanAverageTextLength
+
 
 ## Funktionen des 'ArffFileGenerator'
 
