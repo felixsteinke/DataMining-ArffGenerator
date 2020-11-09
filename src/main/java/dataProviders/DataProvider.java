@@ -14,9 +14,9 @@ public class DataProvider {
     private int averageTextLength;
 
     public DataProvider() {
-        this.mails = CsvUtility.readCsvFile("src/main/resources/enron.csv", ";");
-        this.whiteListedWords = CsvUtility.readWordlist("src/main/resources/whitelist.csv");
-        this.blackListedWords = CsvUtility.readWordlist("src/main/resources/blacklist.csv");
+        this.mails = CsvFileReader.readCsvFile("src/main/resources/enron.csv", ";");
+        this.whiteListedWords = CsvFileReader.readWordlist("src/main/resources/whitelist.csv");
+        this.blackListedWords = CsvFileReader.readWordlist("src/main/resources/blacklist.csv");
 
         calculateAverageValues();
     }
