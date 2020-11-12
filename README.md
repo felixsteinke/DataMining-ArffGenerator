@@ -16,8 +16,8 @@ Location: src > main > java > configurator > Mail
         whiteWordInSub
         whiteWordInText
     
-        this.averageSentenceLength
-        this.maximumSentenceLength
+        averageSentenceLength
+        maximumSentenceLength
     
         biggerThanAverageSubjectLength
         biggerThanAverageTextLength
