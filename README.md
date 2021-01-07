@@ -1,6 +1,7 @@
 # Repository zur Implementierung der Projektarbeit 1
 
 Vorlesung: Machine Learning & Data Mining (Pado)
+
 Mitglieder: Steinke Felix,  Grabowski Florian, Fili Leo Marco
 
 
