@@ -140,22 +140,16 @@ public class Mail {
     Data Converter
      */
 
-    public String getConvertedBoolArrays() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(boolListConverter(whiteWordInSub));
-        stringBuilder.append(boolListConverter(whiteWordInText));
-        stringBuilder.append(boolListConverter(blackWordInSub));
-        stringBuilder.append(boolListConverter(blackWordInText));
-
-        stringBuilder.append(averageSentenceLength).append(",");
-        stringBuilder.append(maximumSentenceLength).append(",");
-
-        stringBuilder.append(boolConverter(biggerThanAverageSubjectLength)).append(",");
-        stringBuilder.append(boolConverter(biggerThanAverageTextLength)).append(",");
-
-        stringBuilder.append(boolConverter(spam));
-        stringBuilder.append("\n"); //new line
-        return stringBuilder.toString();
+    public String getConvertedDataLine() {
+        return boolListConverter(whiteWordInSub) +
+                boolListConverter(whiteWordInText) +
+                boolListConverter(blackWordInSub) +
+                boolListConverter(blackWordInText) +
+                averageSentenceLength + "," +
+                maximumSentenceLength + "," +
+                boolConverter(biggerThanAverageSubjectLength) + "," +
+                boolConverter(biggerThanAverageTextLength) + "," +
+                boolConverter(spam);
     }
 
     private String boolListConverter(ArrayList<Boolean> list) {

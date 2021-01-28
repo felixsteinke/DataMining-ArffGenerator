@@ -67,7 +67,7 @@ public class MailGeneratorPreprocessor extends GeneratorPreprocessor {
         System.out.println("Finished all threads.");
 
         for (Mail mail : dataProvider.getMails()) {
-            dataList.add(mail.getConvertedBoolArrays());
+            dataList.add(mail.getConvertedDataLine());
         }
     }
 }
