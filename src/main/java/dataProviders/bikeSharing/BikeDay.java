@@ -64,10 +64,13 @@ public class BikeDay {
         switch (targetAttribute) {
             case CASUAL:
                 dataLine += casual;
+                break;
             case REGISTERED:
                 dataLine += registered;
+                break;
             case CNT:
                 dataLine += cnt;
+                break;
             default:
         }
         return dataLine;
