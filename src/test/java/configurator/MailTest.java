@@ -1,6 +1,7 @@
 package configurator;
 
-import dataProviders.DataProvider;
+import dataProviders.mail.Mail;
+import dataProviders.mail.MailDataProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,29 +11,19 @@ import java.util.ArrayList;
 
 class MailTest {
 
-    static DataProvider dataProvider;
+    static MailDataProvider dataProvider;
     Mail testMailWhite;
     Mail testMailBlack;
 
     @BeforeAll
     static void setUpData() {
-        dataProvider = new DataProvider();
+        dataProvider = new MailDataProvider();
     }
 
     @BeforeEach
     void prepareMail() {
-        testMailWhite = new Mail(
-                123,
-                "Subject to for meeting",
-                "Text with some uselessMeeting lines.Text with some uselessMeeting lines.",
-                false
-        );
-        testMailBlack = new Mail(
-                1,
-                "Sexmachine",
-                "I want to check this text. Long sentence without any symbol in between but with sexy things",
-                true
-        );
+        testMailWhite = new Mail("123;Subject to for meeting;Text with some uselessMeeting lines.Text with some uselessMeeting lines.;0");
+        testMailBlack = new Mail("1;Sexmachine;I want to check this text. Long sentence without any symbol in between but with sexy things;1");
     }
 
     @Test

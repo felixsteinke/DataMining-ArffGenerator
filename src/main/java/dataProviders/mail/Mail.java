@@ -1,9 +1,12 @@
-package configurator;
+package dataProviders.mail;
+
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Getter
 public class Mail {
 
     public final int id;
@@ -22,11 +25,12 @@ public class Mail {
     private boolean biggerThanAverageSubjectLength;
     private boolean biggerThanAverageTextLength;
 
-    public Mail(int id, String subject, String text, boolean spam) {
-        this.id = id;
-        this.subject = subject;
-        this.text = text;
-        this.spam = spam;
+    public Mail(String csvLine) {
+        String[] splitLine = csvLine.split(";");
+        this.id = Integer.parseInt(splitLine[0]);
+        this.subject = splitLine[1];
+        this.text = splitLine[2];
+        this.spam = splitLine[3].equalsIgnoreCase("1");
 
         this.blackWordInSub = new ArrayList<>();
         this.blackWordInText = new ArrayList<>();
@@ -38,6 +42,7 @@ public class Mail {
 
         this.biggerThanAverageSubjectLength = false;
         this.biggerThanAverageTextLength = false;
+
     }
 
     public void processAnalytics(ArrayList<String> whiteList, ArrayList<String> blackList, int averageSubjectLength, int averageTextLength) {
@@ -168,41 +173,4 @@ public class Mail {
             return 0;
         }
     }
-
-    /*
-    Getter
-     */
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public ArrayList<Boolean> getBlackWordInText() {
-        return blackWordInText;
-    }
-
-    public ArrayList<Boolean> getWhiteWordInText() {
-        return whiteWordInText;
-    }
-
-    public ArrayList<Boolean> getBlackWordInSub() {
-        return blackWordInSub;
-    }
-
-    public ArrayList<Boolean> getWhiteWordInSub() {
-        return whiteWordInSub;
-    }
-
-    public int getAverageSentenceLength() {
-        return averageSentenceLength;
-    }
-
-    public int getMaximumSentenceLength() {
-        return maximumSentenceLength;
-    }
-
 }

@@ -1,6 +1,7 @@
 package configurator;
 
-import dataProviders.DataProvider;
+import dataProviders.mail.Mail;
+import dataProviders.mail.MailDataProvider;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -28,7 +29,7 @@ public class ArffFileGenerator {
 
     public static void main(String[] args) {
         Instant start = Instant.now();
-        DataProvider dataProvider = new DataProvider();
+        MailDataProvider dataProvider = new MailDataProvider();
         new ArffFileGenerator().execute(
                 dataProvider.getMails(),
                 dataProvider.getBlackListedWords(),
