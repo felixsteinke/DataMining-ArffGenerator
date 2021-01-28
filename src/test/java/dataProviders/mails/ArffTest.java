@@ -1,5 +1,6 @@
-package configurator;
+package dataProviders.mails;
 
+import configurator.ArffFileGenerator;
 import dataProviders.mail.Mail;
 import dataProviders.mail.MailDataProvider;
 import org.junit.jupiter.api.BeforeAll;

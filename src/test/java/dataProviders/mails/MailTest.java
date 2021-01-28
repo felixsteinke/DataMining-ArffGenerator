@@ -1,4 +1,4 @@
-package configurator;
+package dataProviders.mails;
 
 import dataProviders.mail.Mail;
 import dataProviders.mail.MailDataProvider;

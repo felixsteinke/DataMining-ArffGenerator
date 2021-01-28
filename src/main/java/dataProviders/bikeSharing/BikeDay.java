@@ -18,10 +18,10 @@ public class BikeDay {
 		- 3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds
 		- 4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog
      */
-    private final double temp; // Normalized temperature in Celsius. The values are divided to 41 (max)
-    private final double atemp; // Normalized feeling temperature in Celsius. The values are divided to 50 (max)
-    private final double hum; // Normalized humidity. The values are divided to 100 (max)
-    private final double windSpeed; // Normalized wind speed. The values are divided to 67 (max)
+    private final double temp; // temperature in Celsius.
+    private final double atemp; // feeling temperature in Celsius.
+    private final double hum; // humidity.
+    private final double windSpeed; // wind speed.
     private final int casual; // count of casual users
     private final int registered; // count of registered users
     private final int cnt; // count of total rental bikes including both casual and registered
