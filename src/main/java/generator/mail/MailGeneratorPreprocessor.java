@@ -30,6 +30,7 @@ public class MailGeneratorPreprocessor extends GeneratorPreprocessor {
         attributeList.add("maximumSentenceLength real");
         attributeList.add("biggerThanAverageSubjectLength integer");
         attributeList.add("biggerThanAverageTextLength integer");
+        attributeList.add("class {0,1}");
     }
 
     private void addAttributeList(ArrayList<String> wordList, String context) {

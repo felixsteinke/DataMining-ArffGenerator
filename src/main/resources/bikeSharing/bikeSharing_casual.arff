@@ -13,7 +13,6 @@
 @attribute 10hum numeric
 @attribute 11windSpeed numeric
 @attribute 12casual numeric
-@attribute class {0,1}
 
 @data
 1,1,2011,1,0,6,0,2,14.11,18.18,80.58,10.75,331

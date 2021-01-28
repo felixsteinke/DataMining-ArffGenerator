@@ -20,7 +20,6 @@ public class FileGenerator {
     public String execute() {
         appendHeader(preprocessor.getTitle());
         appendAttributes(preprocessor.getAttributeList());
-        appendTargetVariable();
         appendData(preprocessor.getDataList());
         return stringBuilder.toString();
     }
@@ -47,11 +46,7 @@ public class FileGenerator {
             stringBuilder.append(attributeAnnotation).append(attributeNumber).append(attribute).append(newLine);
             attributeNumber++;
         }
-    }
-
-    private void appendTargetVariable() {
-        String attributeAnnotation = "@attribute ";
-        stringBuilder.append(attributeAnnotation).append("class {0,1}").append(newLine).append(newLine);
+        stringBuilder.append(newLine);
     }
 
     private void appendData(ArrayList<String> dataList) {
