@@ -3,8 +3,6 @@ package runner;
 import generator.FileGenerator;
 import generator.mail.MailGeneratorPreprocessor;
 
-import java.io.File;
-
 public class MailFileGenerator {
 
     public static void main(String[] args) {
