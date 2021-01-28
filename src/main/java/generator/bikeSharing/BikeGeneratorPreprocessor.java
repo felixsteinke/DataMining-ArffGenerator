@@ -2,14 +2,17 @@ package generator.bikeSharing;
 
 import dataProviders.bikeSharing.BikeDataProvider;
 import generator.GeneratorPreprocessor;
+import utility.TargetAttribute;
 
 public class BikeGeneratorPreprocessor extends GeneratorPreprocessor {
     private final BikeDataProvider dataProvider;
+    private final TargetAttribute targetAttribute;
 
-    public BikeGeneratorPreprocessor() {
+    public BikeGeneratorPreprocessor(TargetAttribute targetAttribute) {
         super();
-        this.title = "SpamGruppeF";
+        this.title = "BikeSharingGruppeF";
         this.dataProvider = new BikeDataProvider();
+        this.targetAttribute = targetAttribute;
         processAttributeList();
         processDataList();
     }
@@ -28,13 +31,22 @@ public class BikeGeneratorPreprocessor extends GeneratorPreprocessor {
         attributeList.add("atemp numeric");
         attributeList.add("hum numeric");
         attributeList.add("windSpeed numeric");
-        attributeList.add("casual numeric");
-        attributeList.add("registered numeric");
-        attributeList.add("cnt numeric");
+        switch (targetAttribute) {
+            case CASUAL:
+                attributeList.add("casual numeric");
+                break;
+            case REGISTERED:
+                attributeList.add("registered numeric");
+                break;
+            case CNT:
+                attributeList.add("cnt numeric");
+                break;
+            default:
+        }
     }
 
     @Override
     protected void processDataList() {
-        dataProvider.getBikeDays().forEach(bikeDay -> dataList.add(bikeDay.getConvertedDataLine()));
+        dataProvider.getBikeDays().forEach(bikeDay -> dataList.add(bikeDay.getConvertedDataLine(targetAttribute)));
     }
 }

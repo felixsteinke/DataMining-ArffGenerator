@@ -1,6 +1,7 @@
 package dataProviders.bikeSharing;
 
 import lombok.Getter;
+import utility.TargetAttribute;
 
 @Getter
 public class BikeDay {
@@ -47,8 +48,8 @@ public class BikeDay {
         this.cnt = Integer.parseInt(splitLine[15]);
     }
 
-    public String getConvertedDataLine() {
-        return day + ","
+    public String getConvertedDataLine(TargetAttribute targetAttribute) {
+        String dataLine = day + ","
                 + month + ","
                 + year + ","
                 + season + ","
@@ -59,12 +60,17 @@ public class BikeDay {
                 + temp + ","
                 + atemp + ","
                 + hum + ","
-                + windSpeed + ","
-                + casual + ","
-                + registered + ","
-                + cnt;
-
-
+                + windSpeed + ",";
+        switch (targetAttribute) {
+            case CASUAL:
+                dataLine += casual;
+            case REGISTERED:
+                dataLine += registered;
+            case CNT:
+                dataLine += cnt;
+            default:
+        }
+        return dataLine;
     }
 
     private double chopDecimal(double value) {
