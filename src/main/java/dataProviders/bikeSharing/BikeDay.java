@@ -30,20 +30,25 @@ public class BikeDay {
     public BikeDay(String csvLine) {
         String[] splitLine = csvLine.split(",");
         String[] dateSplit = splitLine[1].split("-");
-        this.day = Integer.parseInt(dateSplit[0]);
+        this.day = Integer.parseInt(dateSplit[2]);
         this.month = Integer.parseInt(dateSplit[1]);
-        this.year = Integer.parseInt(dateSplit[2]);
+        this.year = Integer.parseInt(dateSplit[0]);
         this.season = Integer.parseInt(splitLine[2]);
         this.holiday = splitLine[5].equalsIgnoreCase("1");
         this.weekday = Integer.parseInt(splitLine[6]);
         this.workingDay = splitLine[7].equalsIgnoreCase("1");
         this.weatherSit = Integer.parseInt(splitLine[8]);
-        this.temp = Double.parseDouble(splitLine[9]) * 41;
-        this.atemp = Double.parseDouble(splitLine[10]) * 50;
-        this.hum = Double.parseDouble(splitLine[11]) * 100;
-        this.windSpeed = Double.parseDouble(splitLine[12]) * 67;
+        this.temp = chopDecimal(Double.parseDouble(splitLine[9]) * 41);
+        this.atemp = chopDecimal(Double.parseDouble(splitLine[10]) * 50);
+        this.hum = chopDecimal(Double.parseDouble(splitLine[11]) * 100);
+        this.windSpeed = chopDecimal(Double.parseDouble(splitLine[12]) * 67);
         this.casual = Integer.parseInt(splitLine[13]);
         this.registered = Integer.parseInt(splitLine[14]);
         this.cnt = Integer.parseInt(splitLine[15]);
+    }
+
+
+    private double chopDecimal(double value) {
+        return Math.round(100.0 * value) / 100.0;
     }
 }

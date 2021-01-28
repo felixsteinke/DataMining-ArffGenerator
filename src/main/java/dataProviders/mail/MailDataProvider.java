@@ -18,9 +18,9 @@ public class MailDataProvider {
     public MailDataProvider() {
         CsvFileReader reader = new CsvFileReader();
         this.mails = new ArrayList<>();
-        reader.readFile("src/main/resources/enron.csv").forEach(mail -> mails.add(new Mail(mail)));
-        this.whiteListedWords = reader.readWordlist("src/main/resources/whitelist.csv");
-        this.blackListedWords = reader.readWordlist("src/main/resources/blacklist.csv");
+        reader.readFile("src/main/resources/mails/enron.csv").forEach(mail -> mails.add(new Mail(mail)));
+        this.whiteListedWords = reader.readWordlist("src/main/resources/mails/whitelist.csv");
+        this.blackListedWords = reader.readWordlist("src/main/resources/mails/blacklist.csv");
 
         calculateAverageValues();
     }

@@ -17,7 +17,7 @@ public class ArffFileGenerator {
     private static final StringBuilder stringBuilder = new StringBuilder();
     public static int number = 0;
 
-    private static final String file = "src/main/resources/analytic_enron.arff";
+    private static final String file = "src/main/resources/mails/analytic_enron.arff";
     private static final String titleAnnotation = "@relation spamGruppeF";
     private static final String attributeAnnotation = "@attribute ";
     private static final String inText = "_in_Text ";
