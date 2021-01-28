@@ -16,4 +16,8 @@ public abstract class GeneratorPreprocessor {
         this.attributeList = new ArrayList<>();
         this.dataList = new ArrayList<>();
     }
+
+    protected abstract void processAttributeList();
+
+    protected abstract void processDataList();
 }

@@ -47,8 +47,35 @@ public class BikeDay {
         this.cnt = Integer.parseInt(splitLine[15]);
     }
 
+    public String getConvertedDataLine() {
+        return day + ","
+                + month + ","
+                + year + ","
+                + season + ","
+                + boolConverter(holiday) + ","
+                + weekday + ","
+                + boolConverter(workingDay) + ","
+                + weatherSit + ","
+                + temp + ","
+                + atemp + ","
+                + hum + ","
+                + windSpeed + ","
+                + casual + ","
+                + registered + ","
+                + cnt;
+
+
+    }
 
     private double chopDecimal(double value) {
         return Math.round(100.0 * value) / 100.0;
+    }
+
+    private int boolConverter(boolean bool) {
+        if (bool) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

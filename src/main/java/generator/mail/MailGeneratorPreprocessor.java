@@ -19,28 +19,28 @@ public class MailGeneratorPreprocessor extends GeneratorPreprocessor {
         processDataList();
     }
 
-    private void processAttributeList() {
+    protected void processAttributeList() {
         String inText = "_in_Text";
         String inSubject = "_in_Subject";
-        addAttributeList(dataProvider.getBlackListedWords(), inText, "integer");
-        addAttributeList(dataProvider.getBlackListedWords(), inSubject, "integer");
-        addAttributeList(dataProvider.getWhiteListedWords(), inText, "integer");
-        addAttributeList(dataProvider.getWhiteListedWords(), inSubject, "integer");
+        addAttributeList(dataProvider.getBlackListedWords(), inText);
+        addAttributeList(dataProvider.getBlackListedWords(), inSubject);
+        addAttributeList(dataProvider.getWhiteListedWords(), inText);
+        addAttributeList(dataProvider.getWhiteListedWords(), inSubject);
         attributeList.add("averageSentenceLength real");
         attributeList.add("maximumSentenceLength real");
         attributeList.add("biggerThanAverageSubjectLength integer");
         attributeList.add("biggerThanAverageTextLength integer");
     }
 
-    private void addAttributeList(ArrayList<String> wordList, String context, String dataType) {
+    private void addAttributeList(ArrayList<String> wordList, String context) {
         for (String word : wordList) {
             word = word.replaceAll("\\s", "_");
             word = word.replaceAll("%", "");
-            attributeList.add(word + context + " " + dataType);
+            attributeList.add(word + context + " integer");
         }
     }
 
-    private void processDataList() {
+    protected void processDataList() {
         ExecutorService executor = Executors.newFixedThreadPool(12);
 
         for (Mail mail : dataProvider.getMails()) {
