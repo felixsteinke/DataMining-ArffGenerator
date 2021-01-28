@@ -1,10 +1,10 @@
-package dataProviders.bikeSharing;
+package com.hft.dataProviders.bikeSharing;
 
-import generator.FileGenerator;
-import generator.bikeSharing.BikeGeneratorPreprocessor;
+import com.hft.generator.FileGenerator;
+import com.hft.generator.bikeSharing.BikeGeneratorPreprocessor;
+import com.hft.utility.TargetAttribute;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import utility.TargetAttribute;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

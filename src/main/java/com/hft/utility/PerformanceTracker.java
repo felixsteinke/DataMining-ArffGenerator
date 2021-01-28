@@ -1,4 +1,4 @@
-package utility;
+package com.hft.utility;
 
 import java.time.Duration;
 import java.time.Instant;

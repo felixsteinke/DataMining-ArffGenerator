@@ -1,8 +1,8 @@
-package generator.bikeSharing;
+package com.hft.generator.bikeSharing;
 
-import dataProviders.bikeSharing.BikeDataProvider;
-import generator.GeneratorPreprocessor;
-import utility.TargetAttribute;
+import com.hft.dataProviders.bikeSharing.BikeDataProvider;
+import com.hft.generator.GeneratorPreprocessor;
+import com.hft.utility.TargetAttribute;
 
 public class BikeGeneratorPreprocessor extends GeneratorPreprocessor {
     private final BikeDataProvider dataProvider;

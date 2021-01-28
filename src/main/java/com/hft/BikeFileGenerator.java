@@ -1,8 +1,8 @@
-package runner;
+package com.hft;
 
-import generator.FileGenerator;
-import generator.bikeSharing.BikeGeneratorPreprocessor;
-import utility.TargetAttribute;
+import com.hft.generator.FileGenerator;
+import com.hft.generator.bikeSharing.BikeGeneratorPreprocessor;
+import com.hft.utility.TargetAttribute;
 
 public class BikeFileGenerator {
 

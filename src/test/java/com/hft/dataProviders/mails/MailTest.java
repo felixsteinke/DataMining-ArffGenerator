@@ -1,7 +1,7 @@
-package dataProviders.mails;
+package com.hft.dataProviders.mails;
 
-import dataProviders.mail.Mail;
-import dataProviders.mail.MailDataProvider;
+import com.hft.dataProviders.mail.Mail;
+import com.hft.dataProviders.mail.MailDataProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

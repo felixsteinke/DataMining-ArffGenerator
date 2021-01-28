@@ -1,4 +1,4 @@
-package generator;
+package com.hft.generator;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

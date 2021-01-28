@@ -1,4 +1,4 @@
-package generator;
+package com.hft.generator;
 
 import lombok.Getter;
 

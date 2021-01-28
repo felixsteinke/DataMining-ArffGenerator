@@ -1,8 +1,8 @@
-package generator.mail;
+package com.hft.generator.mail;
 
-import dataProviders.mail.Mail;
-import dataProviders.mail.MailDataProvider;
-import generator.GeneratorPreprocessor;
+import com.hft.dataProviders.mail.Mail;
+import com.hft.dataProviders.mail.MailDataProvider;
+import com.hft.generator.GeneratorPreprocessor;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;

@@ -1,6 +1,6 @@
-package dataProviders.bikeSharing;
+package com.hft.dataProviders.bikeSharing;
 
-import dataProviders.CsvFileReader;
+import com.hft.dataProviders.CsvFileReader;
 import lombok.Getter;
 
 import java.util.ArrayList;

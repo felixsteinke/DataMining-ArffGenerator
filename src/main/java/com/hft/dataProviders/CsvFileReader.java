@@ -1,4 +1,4 @@
-package dataProviders;
+package com.hft.dataProviders;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

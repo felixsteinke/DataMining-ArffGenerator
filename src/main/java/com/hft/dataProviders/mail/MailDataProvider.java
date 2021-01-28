@@ -1,6 +1,6 @@
-package dataProviders.mail;
+package com.hft.dataProviders.mail;
 
-import dataProviders.CsvFileReader;
+import com.hft.dataProviders.CsvFileReader;
 import lombok.Getter;
 
 import java.util.ArrayList;

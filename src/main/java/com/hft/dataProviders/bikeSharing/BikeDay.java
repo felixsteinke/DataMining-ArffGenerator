@@ -1,7 +1,7 @@
-package dataProviders.bikeSharing;
+package com.hft.dataProviders.bikeSharing;
 
+import com.hft.utility.TargetAttribute;
 import lombok.Getter;
-import utility.TargetAttribute;
 
 @Getter
 public class BikeDay {

@@ -1,7 +1,7 @@
-package runner;
+package com.hft;
 
-import generator.FileGenerator;
-import generator.mail.MailGeneratorPreprocessor;
+import com.hft.generator.FileGenerator;
+import com.hft.generator.mail.MailGeneratorPreprocessor;
 
 public class MailFileGenerator {
 

@@ -1,4 +1,4 @@
-package dataProviders.mail;
+package com.hft.dataProviders.mail;
 
 import lombok.Getter;
 
